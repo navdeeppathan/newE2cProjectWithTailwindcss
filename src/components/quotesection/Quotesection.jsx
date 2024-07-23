@@ -31,7 +31,7 @@ const Quotesection = () => {
           <Swiper
             style={{
               "--swiper-pagination-color": "#3366FF",
-              "--swiper-pagination-bullet-inactive-color": "#999999",
+              "--swiper-pagination-bullet-inactive-color": "#3366FF",
               "--swiper-pagination-bullet-width": "24px",
               "--swiper-pagination-bullet-height": "5px",
               "--swiper-pagination-bullet-border-radius": "2px",
