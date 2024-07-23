@@ -1,0 +1,41 @@
+.scrollable-quotes {
+  height: 688px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-right: 8px;
+  background: #ffffff;
+  direction: rtl;
+  scroll-behavior: smooth;
+}
+@media (min-width: 357px) {
+  .scrollable-quotes {
+    height: 912px;
+  }
+}
+@media (min-width: 768px) {
+  .scrollable-quotes {
+    height: 912px;
+  }
+}
+@media (min-width: 1204px) {
+  .scrollable-quotes {
+    height: 688px;
+  }
+}
+.scrollable-quotes > * {
+  direction: ltr;
+}
+
+.scrollable-quotes::-webkit-scrollbar {
+  width: 7px;
+  height: 120px;
+}
+
+.scrollable-quotes::-webkit-scrollbar-thumb {
+  background: #4822e0;
+  min-height: 10px;
+  max-height: 20px;
+}
+.scrollable-quotes::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
