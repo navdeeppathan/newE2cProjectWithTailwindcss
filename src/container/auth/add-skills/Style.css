@@ -1,0 +1,24 @@
+/* styles.css */
+.scroll-hidden::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.scroll-hidden {
+  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background of the scrollbar track */
+  border-radius: 10px; /* Rounding the track */
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #a0aec0; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounding the thumb */
+  border: 2px solid #f1f1f1; /* Border around the thumb */
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #718096; /* Hover state for the scrollbar thumb */
+}

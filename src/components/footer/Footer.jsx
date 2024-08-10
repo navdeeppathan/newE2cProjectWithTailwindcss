@@ -2,6 +2,7 @@ import React from "react";
 import {
   appStore,
   E2Cimg,
+  e2cImgWhite,
   fb,
   googlePlay,
   insta,
@@ -15,11 +16,7 @@ const Footer = () => {
     <div className="w-full bg-[#091e42] mt-20 flex flex-col items-center justify-between">
       <div className="px-6 md:px-10 lg:px-20 xl:px-40 pt-10">
         <div className="flex flex-col items-center justify-center gap-4">
-          <img
-            src={E2Cimg}
-            alt="filter applied"
-            className="max-w-xs md:max-w-md lg:max-w-lg xl:max-w-xl"
-          />
+          <img src={e2cImgWhite} alt="filter applied" className="w-44 h-24 " />
           <h3 className="opacity-80 px-20 md:px-4 xl:px-12 text-sm md:text-base lg:text-lg xl:text-xl font-normal text-center text-[#dee4ea]">
             Explore the inspiring testimonials from our satisfied users and
             discover how our resume builder application has transformed their
