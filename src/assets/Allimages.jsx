@@ -63,24 +63,26 @@ import recycleBin from "../assets/images/delete.png";
 import add from "../assets/images/fram8.png";
 import add3 from "../assets/images/add2.png";
 
-import blackfram from "../assets/images/blackfram.png";
-import whitefram from "../assets/images/whitefram.png";
-
 import rightArrow from "../assets/images/next.png";
 
+import blackfram from "../assets/images/blackfram.png";
 import blackfram1 from "../assets/images/blackfram1.png";
 import blackfram2 from "../assets/images/blackfram2.png";
 import blackfram3 from "../assets/images/blackfram3.png";
 import blackfram4 from "../assets/images/blackfram4.png";
 import blackfram5 from "../assets/images/blackfram5.png";
 import blackfram6 from "../assets/images/blackfram6.png";
+import blackfram7 from "../assets/images/blackfram7.png";
+import blackfram8 from "../assets/images/blackfram8.png";
 
+import whitefram from "../assets/images/whitefram.png";
 import whitefram1 from "../assets/images/whitefram1.png";
 import whitefram2 from "../assets/images/whitefram2.png";
 import whitefram3 from "../assets/images/whitefram3.png";
 import whitefram4 from "../assets/images/whitefram4.png";
 import whitefram5 from "../assets/images/whitefram5.png";
 import whitefram6 from "../assets/images/whitefram6.png";
+import whitefram7 from "../assets/images/whitefram7.png";
 
 import file_copy from "../assets/images/file_copy.png";
 import file_copy2 from "../assets/images/file_copy2.png";
@@ -101,7 +103,6 @@ import content from "../assets/images/content.png";
 import upper_arrow from "../assets/images/left-arrow.png";
 import bar from "../assets/images/bar.png";
 import downloadBtn from "../assets/images/downloadBtn.png";
-import rate from "../assets/images/Rate2.png";
 import dropDownArrow from "../assets/images/dropDownArrow.png";
 import calenderStart from "../assets/images/calendarStart.png";
 import calenderEnd from "../assets/images/calendarEnd.png";
@@ -111,7 +112,33 @@ import number from "../assets/images/number.png";
 import bold_text from "../assets/images/bold-text.png";
 import italics from "../assets/images/italics.png";
 
+import grayfram from "../assets/images/grayfram.png";
+import grayfram1 from "../assets/images/grayfram1.png";
+import grayfram2 from "../assets/images/grayfram2.png";
+import grayfram3 from "../assets/images/grayfram3.png";
+import grayfram4 from "../assets/images/grayfram4.png";
+import grayfram5 from "../assets/images/grayfram5.png";
+import grayfram6 from "../assets/images/grayfram6.png";
+import grayfram7 from "../assets/images/grayfram7.png";
+import grayfram8 from "../assets/images/grayfram8.png";
+
+import rate from "../assets/images/Rate2.png";
+import activeStar from "../assets/images/activeStar.png";
+
 export {
+  activeStar,
+  blackfram7,
+  blackfram8,
+  whitefram7,
+  grayfram,
+  grayfram1,
+  grayfram2,
+  grayfram3,
+  grayfram4,
+  grayfram5,
+  grayfram6,
+  grayfram7,
+  grayfram8,
   bullet_list,
   underline,
   bold_text,

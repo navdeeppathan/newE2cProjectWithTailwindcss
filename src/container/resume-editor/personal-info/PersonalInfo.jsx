@@ -1,4 +1,5 @@
 import React, { useCallback, useRef, useState } from "react";
+import "./scroll.css";
 
 import {
   add,
@@ -24,11 +25,6 @@ import {
   file_copy,
   file_copy2,
   flag,
-  format_bold,
-  format_italic,
-  format_list_bulleted,
-  format_list_numbered,
-  format_underlined,
   greenbullet,
   italics,
   keyboard_arrow_left,
@@ -36,7 +32,6 @@ import {
   location,
   nextArrow,
   number,
-  person4,
   phone,
   rate,
   recycleBin,
@@ -52,7 +47,7 @@ import DashboardFields from "./DashboardFields";
 import { Avatar, TextField } from "@mui/material";
 import CustomTextField from "../../../Utils/CustomTextField";
 import AddSectionBtn from "../../../Utils/AddSectionBtn";
-import Colors from "../../../Utils/Colors";
+import StarTextField from "../../../Utils/StarTextField";
 
 const PersonalInfo = () => {
   const [preview, setPreview] = useState(null);
@@ -78,7 +73,7 @@ const PersonalInfo = () => {
   const handleOptions = useCallback((dasboard) => {
     setHeaderText(dasboard.txtNm);
     setIsActiveComponent(dasboard.txtNm);
-    setHeaderImg(dasboard.blackImg);
+    setHeaderImg(dasboard.grayImg);
   }, []);
 
   return (
@@ -1522,6 +1517,10 @@ const InfoSection = ({ isActiveComponent }) => {
         {isActiveComponent === "Internship" && <Internship />}
         {isActiveComponent === "Projects" && <Projects />}
         {isActiveComponent === "Skills" && <DashboardSkills />}
+        {isActiveComponent === "Certification" && <DashboardCertification />}
+        {isActiveComponent === "Achievements" && <DashboardAchievements />}
+        {isActiveComponent === "Hobbies" && <DashboardHobbies />}
+        {isActiveComponent === "Languages" && <DashboardLanguages />}
       </div>
 
       <div className="w-full gap-4 flex items-center justify-center cursor-pointer">
@@ -1539,6 +1538,7 @@ const InfoSection = ({ isActiveComponent }) => {
   );
 };
 
+//Dashboard Fields onClick show these data
 const Education = () => {
   const [ischeck, setIsCheck] = useState(false);
 
@@ -1721,17 +1721,31 @@ const Projects = () => {
 };
 
 const DashboardSkills = () => {
+  const [showStars, setShowStars] = useState(false);
+  const [isOn, setIsOn] = useState(false);
+  const handlebuttonClick = useCallback(() => {
+    setShowStars((prevState) => !prevState);
+    setIsOn((prevState) => !prevState);
+  }, []);
+
   return (
-    <div>
-      <div className="flex ">
-        <div>
-          <h3
-            className={`font-sans font-bold text-base text-[${Colors.black}]`}
-          >
+    <div className="flex flex-col gap-6">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <h3 className={`font-sans font-bold text-base text-[#091E42]`}>
             Show skill rating
           </h3>
-          <div className="w-11 h-6 bg-[#B3B9C4] rounded-xl flex items-center justify-start">
-            <div className="w-5 h-5 bg-white rounded-full" />
+          <div
+            className={`w-11 h-6  bg-[#B3B9C4] rounded-xl flex items-center p-0.5 ${
+              isOn ? "justify-end" : "justify-start"
+            }`}
+            onClick={handlebuttonClick}
+          >
+            <div
+              className={`w-5 h-5 ${
+                isOn ? "bg-[#3366FF]" : "bg-white"
+              } rounded-full`}
+            />
           </div>
         </div>
         <div>
@@ -1742,6 +1756,261 @@ const DashboardSkills = () => {
             </h3>
           </div>
         </div>
+      </div>
+
+      <div className="custom-scrollbar h-screen flex flex-col gap-4">
+        <div className="w-full  p-3 border border-[#DCDFE4] shadow-md rounded-lg">
+          <div className="px-4 w-full bg-[#D6E4FF4D] shadow-sm flex items-center justify-between h-11 rounded cursor-pointer ">
+            <h3 className="font-sans font-bold text-base text-[#091E42]">
+              Skill - 1
+            </h3>
+            <img src={recycleBin} alt="" className="w-4 h-4" />
+          </div>
+          <div className="shadow-sm my-6">
+            <StarTextField label={"Skill Name "} showStars={showStars} />
+          </div>
+        </div>
+        <div className="w-full p-3 border border-[#DCDFE4] shadow-md rounded-lg">
+          <div className="px-4 w-full bg-[#D6E4FF4D] shadow-sm flex items-center justify-between h-11 rounded cursor-pointer ">
+            <h3 className="font-sans font-bold text-base text-[#091E42]">
+              Skill - 2
+            </h3>
+            <img src={recycleBin} alt="" className="w-4 h-4" />
+          </div>
+          <div className="shadow-sm my-6">
+            <StarTextField label={"Skill Name "} showStars={showStars} />
+          </div>
+        </div>
+        <div className="w-full p-3 border border-[#DCDFE4] shadow-md rounded-lg">
+          <div className="px-4 w-full bg-[#D6E4FF4D] shadow-sm flex items-center justify-between h-11 rounded cursor-pointer ">
+            <h3 className="font-sans font-bold text-base text-[#091E42]">
+              Skill - 3
+            </h3>
+            <img src={recycleBin} alt="" className="w-4 h-4" />
+          </div>
+          <div className="shadow-sm my-6">
+            <StarTextField label={"Skill Name "} showStars={showStars} />
+          </div>
+        </div>
+        <div className="w-full p-3 border border-[#DCDFE4] shadow-md rounded-lg">
+          <div className="px-4 w-full bg-[#D6E4FF4D] shadow-sm flex items-center justify-between h-11 rounded cursor-pointer ">
+            <h3 className="font-sans font-bold text-base text-[#091E42]">
+              Skill - 4
+            </h3>
+            <img src={recycleBin} alt="" className="w-4 h-4" />
+          </div>
+          <div className="shadow-sm my-6">
+            <StarTextField label={"Skill Name "} showStars={showStars} />
+          </div>
+        </div>
+        <div className="w-full p-3 border border-[#DCDFE4] shadow-md rounded-lg">
+          <div className="px-4 w-full bg-[#D6E4FF4D] shadow-sm flex items-center justify-between h-11 rounded cursor-pointer ">
+            <h3 className="font-sans font-bold text-base text-[#091E42]">
+              Skill - 5
+            </h3>
+            <img src={recycleBin} alt="" className="w-4 h-4" />
+          </div>
+          <div className="shadow-sm my-6">
+            <StarTextField label={"Skill Name "} showStars={showStars} />
+          </div>
+        </div>
+        <div className="w-full p-3 border border-[#DCDFE4] shadow-md rounded-lg">
+          <div className="px-4 w-full bg-[#D6E4FF4D] shadow-sm flex items-center justify-between h-11 rounded cursor-pointer ">
+            <h3 className="font-sans font-bold text-base text-[#091E42]">
+              Skill - 6
+            </h3>
+            <img src={recycleBin} alt="" className="w-4 h-4" />
+          </div>
+          <div className="shadow-sm my-6">
+            <StarTextField label={"Skill Name "} showStars={showStars} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const DashboardCertification = () => {
+  const [text, setText] = useState("");
+
+  const handleChange = (event) => {
+    setText(event.target.value);
+    event.target.style.height = "auto"; // Reset the height
+    event.target.style.height = event.target.scrollHeight + "px"; // Set the height to match the content
+  };
+  return (
+    <div className="w-full">
+      <div className="w-full mx-auto shadow-sm border border-gray-300 rounded-md">
+        <div className="w-full gap-4 px-2 h-14 bg-[#DCDFE4] bg-opacity-30 shadow-md flex items-center">
+          <img src={bold_text} alt="" className="w-3.5 h-3.5 opacity-80" />
+          <img src={italics} alt="" className="w-3.5 h-3.5 opacity-80" />
+          <img src={underline} alt="" className="w-4 h-4 opacity-80" />
+          <hr className="w-5 border rotate-90 border-[#b9babc]" />
+          <img src={bullet_list} alt="" className="w-4 h-4 opacity-80" />
+          <img src={number} alt="" className="w-4 h-4 opacity-80" />
+          <hr className="w-5 border rotate-90 border-[#b9babc]" />
+        </div>
+
+        <textarea
+          value={text}
+          onChange={handleChange}
+          placeholder="Enter your description here..."
+          className="block w-full p-2 my-2 focus:outline-none "
+          style={{ minHeight: "50px", resize: "none", overflow: "hidden" }} // Prevents manual resizing and hides scrollbar
+        />
+      </div>
+    </div>
+  );
+};
+
+const DashboardAchievements = () => {
+  const [text, setText] = useState("");
+
+  const handleChange = (event) => {
+    setText(event.target.value);
+    event.target.style.height = "auto"; // Reset the height
+    event.target.style.height = event.target.scrollHeight + "px"; // Set the height to match the content
+  };
+  return (
+    <div className="w-full">
+      <div className="w-full mx-auto shadow-sm border border-gray-300 rounded-md">
+        <div className="w-full gap-4 px-2 h-14 bg-[#DCDFE4] bg-opacity-30 shadow-md flex items-center">
+          <img src={bold_text} alt="" className="w-3.5 h-3.5 opacity-80" />
+          <img src={italics} alt="" className="w-3.5 h-3.5 opacity-80" />
+          <img src={underline} alt="" className="w-4 h-4 opacity-80" />
+          <hr className="w-5 border rotate-90 border-[#b9babc]" />
+          <img src={bullet_list} alt="" className="w-4 h-4 opacity-80" />
+          <img src={number} alt="" className="w-4 h-4 opacity-80" />
+          <hr className="w-5 border rotate-90 border-[#b9babc]" />
+        </div>
+
+        <textarea
+          value={text}
+          onChange={handleChange}
+          placeholder="Enter your description here..."
+          className="block w-full p-2 my-2 focus:outline-none "
+          style={{ minHeight: "50px", resize: "none", overflow: "hidden" }} // Prevents manual resizing and hides scrollbar
+        />
+      </div>
+    </div>
+  );
+};
+
+const DashboardHobbies = () => {
+  return (
+    <div className="py-6">
+      <div className="custom-scrollbar h-screen flex flex-col gap-4">
+        <div className="w-full  p-3 border border-[#DCDFE4] shadow-md rounded-lg">
+          <div className="px-4 w-full bg-[#D6E4FF4D] shadow-sm flex items-center justify-between h-11 rounded cursor-pointer ">
+            <h3 className="font-sans font-bold text-base text-[#091E42]">
+              Hobby - 1
+            </h3>
+            <img src={recycleBin} alt="" className="w-4 h-4" />
+          </div>
+          <div className="shadow-sm my-6">
+            <CustomTextField label={"Hobby Name"} />
+          </div>
+        </div>
+        <div className="w-full p-3 border border-[#DCDFE4] shadow-md rounded-lg">
+          <div className="px-4 w-full bg-[#D6E4FF4D] shadow-sm flex items-center justify-between h-11 rounded cursor-pointer ">
+            <h3 className="font-sans font-bold text-base text-[#091E42]">
+              Hobby - 2
+            </h3>
+            <img src={recycleBin} alt="" className="w-4 h-4" />
+          </div>
+          <div className="shadow-sm my-6">
+            <CustomTextField label={"Hobby Name"} />
+          </div>
+        </div>
+        <div className="w-full p-3 border border-[#DCDFE4] shadow-md rounded-lg">
+          <div className="px-4 w-full bg-[#D6E4FF4D] shadow-sm flex items-center justify-between h-11 rounded cursor-pointer ">
+            <h3 className="font-sans font-bold text-base text-[#091E42]">
+              Hobby - 3
+            </h3>
+            <img src={recycleBin} alt="" className="w-4 h-4" />
+          </div>
+          <div className="shadow-sm my-6">
+            <CustomTextField label={"Hobby Name"} />
+          </div>
+        </div>
+        <div className="w-full p-3 border border-[#DCDFE4] shadow-md rounded-lg">
+          <div className="px-4 w-full bg-[#D6E4FF4D] shadow-sm flex items-center justify-between h-11 rounded cursor-pointer ">
+            <h3 className="font-sans font-bold text-base text-[#091E42]">
+              Hobby - 4
+            </h3>
+            <img src={recycleBin} alt="" className="w-4 h-4" />
+          </div>
+          <div className="shadow-sm my-6">
+            <CustomTextField label={"Hobby Name"} />
+          </div>
+        </div>
+        <div className="w-full p-3 border border-[#DCDFE4] shadow-md rounded-lg">
+          <div className="px-4 w-full bg-[#D6E4FF4D] shadow-sm flex items-center justify-between h-11 rounded cursor-pointer ">
+            <h3 className="font-sans font-bold text-base text-[#091E42]">
+              Hobby - 5
+            </h3>
+            <img src={recycleBin} alt="" className="w-4 h-4" />
+          </div>
+          <div className="shadow-sm my-6">
+            <CustomTextField label={"Hobby Name"} />
+          </div>
+        </div>
+        <div className="w-full p-3 border border-[#DCDFE4] shadow-md rounded-lg">
+          <div className="px-4 w-full bg-[#D6E4FF4D] shadow-sm flex items-center justify-between h-11 rounded cursor-pointer ">
+            <h3 className="font-sans font-bold text-base text-[#091E42]">
+              Hobby - 6
+            </h3>
+            <img src={recycleBin} alt="" className="w-4 h-4" />
+          </div>
+          <div className="shadow-sm my-6">
+            <CustomTextField label={"Hobby Name"} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const DashboardLanguages = () => {
+  return (
+    <div className="flex flex-col gap-12 py-4">
+      <div className="flex flex-col items-center gap-4 py-4">
+        <div className="w-full p-3 border border-[#DCDFE4] shadow-md rounded-lg">
+          <div className="px-4 w-full bg-[#D6E4FF4D] shadow-sm flex items-center justify-between h-11 rounded cursor-pointer ">
+            <h3 className="font-sans font-bold text-base text-[#091E42]">
+              Language - 1
+            </h3>
+            <img src={recycleBin} alt="" className="w-4 h-4" />
+          </div>
+          <div className="shadow-sm my-6">
+            <CustomTextField label={"Eg. English"} />
+          </div>
+        </div>
+        <div className="w-full p-3 border border-[#DCDFE4] shadow-md rounded-lg">
+          <div className="px-4 w-full bg-[#D6E4FF4D] shadow-sm flex items-center justify-between h-11 rounded cursor-pointer ">
+            <h3 className="font-sans font-bold text-base text-[#091E42]">
+              Language - 2
+            </h3>
+            <img src={recycleBin} alt="" className="w-4 h-4" />
+          </div>
+          <div className="shadow-sm my-6">
+            <CustomTextField label={"Eg. English"} />
+          </div>
+        </div>
+        <div className="w-full p-3 border border-[#DCDFE4] shadow-md rounded-lg">
+          <div className="px-4 w-full bg-[#D6E4FF4D] shadow-sm flex items-center justify-between h-11 rounded cursor-pointer ">
+            <h3 className="font-sans font-bold text-base text-[#091E42]">
+              Language - 3
+            </h3>
+            <img src={recycleBin} alt="" className="w-4 h-4" />
+          </div>
+          <div className="shadow-sm my-6">
+            <CustomTextField label={"Eg. English"} />
+          </div>
+        </div>
+      </div>
+      <div>
+        <AddSectionBtn btnText={"ADD ANOTHER LANGUAGE"} width={"w-60"} />
       </div>
     </div>
   );

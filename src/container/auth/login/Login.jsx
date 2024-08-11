@@ -151,7 +151,7 @@ const Login = () => {
         <div className="text-center mt-8">
           <h3 className="text-sm font-medium text-gray-800">
             Already have an account?{" "}
-            <Link to="/login">
+            <Link to="/signup">
               <button className="text-blue-600 font-bold">Sign Up</button>
             </Link>
           </h3>

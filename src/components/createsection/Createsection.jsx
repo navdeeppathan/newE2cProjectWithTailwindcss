@@ -34,7 +34,7 @@ const Createsection = () => {
               />
             </div>
           </div>
-          <div className="w-full h-auto rounded mt-10 xl:mt-0 xl:w-[472px]  xl:max-h-[688px]">
+          <div className="w-full h-auto rounded mt-10 xl:mt-0 xl:w-[472px]  xl:max-h-[688px] cursor-pointer">
             <div className="scrollable-quotes">
               {quotes.map((quote) => (
                 <div

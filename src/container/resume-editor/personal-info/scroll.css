@@ -1,0 +1,23 @@
+/* scrollbar.css */
+.custom-scrollbar {
+  overflow-y: scroll;
+  padding-right: 16px;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #091e420f;
+  border-radius: 4px;
+  border: 1px solid #091e420f;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

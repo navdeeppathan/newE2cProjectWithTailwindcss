@@ -32,7 +32,7 @@
 }
 
 .scrollable-quotes::-webkit-scrollbar-thumb {
-  background: #4822e0;
+  background: #3366ff;
   min-height: 10px;
   max-height: 20px;
 }
