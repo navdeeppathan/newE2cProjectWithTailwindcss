@@ -173,7 +173,7 @@ const PersonalInfo = () => {
             </div>
             <div className="xl:hidden">
               <h2 className="font-sans font-semibold text-xl text-[#091E42]">
-                {preview ? "Resume Preview" : "Personal information"}
+                {preview ? "Resume Preview" : headerText}
               </h2>
             </div>
             <div className="flex items-center gap-6">
@@ -191,7 +191,11 @@ const PersonalInfo = () => {
           className="xl:hidden fixed flex flex-col bg-[#091e424f] items-start top-0 gap-5  shadow-2xl w-full h-full z-50 transition-left duration-500 left-[-568px]"
           ref={menuRef}
         >
-          <DashboardMenu closeMenuRef={closeMenuRef} />
+          <DashboardMenu
+            closeMenuRef={closeMenuRef}
+            isActiveComponent={isActiveComponent}
+            handleOptions={handleOptions}
+          />
         </div>
 
         <div
@@ -239,30 +243,49 @@ const PersonalInfo = () => {
   );
 };
 
-const DashboardMenu = ({ closeMenuRef }) => {
+const DashboardMenu = ({ closeMenuRef, isActiveComponent, handleOptions }) => {
   return (
-    <div className="bg-[#091E42] h-full">
+    <div className="bg-[#091E42] h-screen">
       <div onClick={closeMenuRef}>
         <img src={e2cImgWhite} alt="" className="w-28 h-16 cursore-pointer" />
       </div>
 
-      <div className="pt-8">
-        <div className="w-full h-14 bg-[#172B4D] flex items-center px-6 py-3 gap-2">
+      <div className="pt-8 ">
+        {/* <div className="w-full h-14 bg-[#172B4D] flex items-center px-6 py-3 gap-2">
           <div className="w-6 h-6 bg-[#FFBB4E] rounded flex items-center justify-center">
             <img src={blackfram} alt="" className="w-5 h-5" />
           </div>
           <h3 className="font-sans font-semibold text-sm text-white ">
             Personal info
           </h3>
-        </div>
-        <div>
+        </div> */}
+        <div className="">
           {DashboardFields.map((dasboard) => (
             <div
               key={dasboard.id}
-              className="w-full h-14 flex items-center px-6 py-3 gap-2"
+              className={`w-full h-full flex items-center px-6 py-3 gap-2 cursor-pointer
+                  ${isActiveComponent === dasboard.txtNm ? "bg-[#172B4D]" : ""}
+                  `}
+              onClick={() => handleOptions(dasboard)}
             >
-              <div className="w-6 h-6 bg-[#D6E4FF4D] rounded flex items-center justify-center">
-                <img src={dasboard.whiteImg} alt="" className="w-4 h-4" />
+              <div
+                className={`w-6 h-6  rounded flex items-center justify-center
+                  ${
+                    isActiveComponent === dasboard.txtNm
+                      ? "bg-[#FFBB4E]"
+                      : "bg-[#D6E4FF4D]"
+                  }
+                  `}
+              >
+                <img
+                  src={
+                    isActiveComponent === dasboard.txtNm
+                      ? dasboard.blackImg
+                      : dasboard.whiteImg
+                  }
+                  alt=""
+                  className="w-4 h-4"
+                />
               </div>
               <h3 className="font-sans font-semibold text-sm text-white ">
                 {dasboard.txtNm}
@@ -1650,7 +1673,7 @@ const Internship = () => {
             </div>
             <div className="w-80 px-4 h-9 bg-[#FFBB4E] flex items-center justify-center rounded gap-2">
               <img src={bullet_list} alt="" className="w-3 h-3" />
-              <h3 className="font-sans font-semibold text-sm text-[#091E42]">
+              <h3 className="font-sans font-semibold text-xs md:text-sm text-[#091E42]">
                 Auto-Fill content for me
               </h3>
             </div>
@@ -1713,7 +1736,7 @@ const Projects = () => {
           </div>
         </div>
       </div>
-      <div className="shadow-sm">
+      <div className="shadow-sm py-6 xl:py-0">
         <AddSectionBtn btnText={"ADD ANOTHER PROJECT"} width="xl:w-60 w-full" />
       </div>
     </div>
@@ -1758,7 +1781,7 @@ const DashboardSkills = () => {
         </div>
       </div>
 
-      <div className="custom-scrollbar h-screen flex flex-col gap-4">
+      <div className="custom-scrollbar h-screen flex flex-col gap-4 my-4  md:my-0">
         <div className="w-full  p-3 border border-[#DCDFE4] shadow-md rounded-lg">
           <div className="px-4 w-full bg-[#D6E4FF4D] shadow-sm flex items-center justify-between h-11 rounded cursor-pointer ">
             <h3 className="font-sans font-bold text-base text-[#091E42]">
@@ -1839,7 +1862,7 @@ const DashboardCertification = () => {
     event.target.style.height = event.target.scrollHeight + "px"; // Set the height to match the content
   };
   return (
-    <div className="w-full">
+    <div className="w-full h-screen">
       <div className="w-full mx-auto shadow-sm border border-gray-300 rounded-md">
         <div className="w-full gap-4 px-2 h-14 bg-[#DCDFE4] bg-opacity-30 shadow-md flex items-center">
           <img src={bold_text} alt="" className="w-3.5 h-3.5 opacity-80" />
@@ -1872,7 +1895,7 @@ const DashboardAchievements = () => {
     event.target.style.height = event.target.scrollHeight + "px"; // Set the height to match the content
   };
   return (
-    <div className="w-full">
+    <div className="w-full h-screen">
       <div className="w-full mx-auto shadow-sm border border-gray-300 rounded-md">
         <div className="w-full gap-4 px-2 h-14 bg-[#DCDFE4] bg-opacity-30 shadow-md flex items-center">
           <img src={bold_text} alt="" className="w-3.5 h-3.5 opacity-80" />
@@ -2009,8 +2032,8 @@ const DashboardLanguages = () => {
           </div>
         </div>
       </div>
-      <div>
-        <AddSectionBtn btnText={"ADD ANOTHER LANGUAGE"} width={"w-60"} />
+      <div className="">
+        <AddSectionBtn btnText={"ADD ANOTHER LANGUAGE"} width={"md:w-60 "} />
       </div>
     </div>
   );
