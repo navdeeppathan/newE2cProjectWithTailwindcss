@@ -76,6 +76,21 @@ const PersonalInfo = () => {
     setHeaderImg(dasboard.grayImg);
   }, []);
 
+  const [resumeData, setResumeData] = useState({
+    fullname: "",
+    number: "",
+    email: "",
+    address: "",
+    zipcode: "",
+    country: "",
+    state: "",
+    city: "",
+  });
+
+  const handleFormSubmit = (data) => {
+    setResumeData(data);
+  };
+
   return (
     <div className="flex w-full ">
       {/* Dashboard Page */}
@@ -85,14 +100,6 @@ const PersonalInfo = () => {
         </div>
 
         <div className="pt-8">
-          {/* <div className="w-full h-14 bg-[#172B4D] flex items-center px-6 py-3 gap-2">
-            <div className="w-6 h-6 bg-[#FFBB4E] rounded flex items-center justify-center">
-              <img src={blackfram} alt="" className="w-5 h-5" />
-            </div>
-            <h3 className="font-sans font-semibold text-sm text-white ">
-              Personal info
-            </h3>
-          </div> */}
           <div>
             {DashboardFields.map((dasboard) => (
               <div
@@ -229,13 +236,16 @@ const PersonalInfo = () => {
             {preview === 1 ? (
               <Preview />
             ) : (
-              <InfoSection isActiveComponent={isActiveComponent} />
+              <InfoSection
+                isActiveComponent={isActiveComponent}
+                onSubmit={handleFormSubmit}
+              />
             )}
           </div>
           {/* Resume Template */}
           {/* hidden xl:block */}
           <div className="xl:w-[54%] bg-[#D6E4FF4D] hidden xl:block ">
-            <ResumeTemplate />
+            <ResumeTemplate data={resumeData} />
           </div>
         </div>
       </div>
@@ -391,7 +401,7 @@ function Preview() {
   );
 }
 
-const ResumeTemplate = () => {
+const ResumeTemplate = ({ data }) => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const totalSlides = 2;
 
@@ -455,11 +465,19 @@ const ResumeTemplate = () => {
                 <div className="bg-[#BFDBF852] h-auto py-2">
                   {/* header Image and Name */}
                   <div>
-                    <Header />
+                    <Header fullname={data.fullname} />
                   </div>
                   {/* contact section */}
                   <div>
-                    <Contact />
+                    <Contact
+                      number={data.number}
+                      inputEmail={data.email}
+                      address={data.address}
+                      zipcode={data.zipcode}
+                      country={data.country}
+                      state={data.state}
+                      city={data.city}
+                    />
                   </div>
                 </div>
 
@@ -1047,9 +1065,9 @@ const ContentButton = () => {
 };
 
 // left Section
-const Header = () => {
+const Header = ({ fullname }) => {
   return (
-    <div className=" flex flex-col items-center xl:py-4 gap-2 xl:gap-0">
+    <div className=" flex flex-col items-center xl:py-4 gap-2 xl:gap-2">
       <div className="rounded-full flex items-center justify-center w-16 h-16  xl:w-28 xl:h-28 border-2 border-white">
         <div className="rounded-full">
           <img
@@ -1061,7 +1079,18 @@ const Header = () => {
       </div>
       <div>
         <h2 className="font-sans font-normal text-xs xl:text-xl text-white">
-          <span className="font-bold">Jessica</span> Robertson
+          {fullname ? (
+            <>
+              <span className="font-bold">{fullname.split(" ")[0]}</span>
+              <span className="font-light"> {fullname.split(" ")[1]}</span>
+            </>
+          ) : (
+            <>
+              {/* Default FULL Name */}
+              <span className="font-bold">Jessica</span>
+              <span className="font-light"> Robertson</span>
+            </>
+          )}
         </h2>
       </div>
       <div>
@@ -1072,7 +1101,15 @@ const Header = () => {
     </div>
   );
 };
-const Contact = () => {
+const Contact = ({
+  number,
+  inputEmail,
+  address,
+  zipcode,
+  country,
+  state,
+  city,
+}) => {
   return (
     <div className="flex flex-col items-center justify-center py-4">
       <div className="w-[80%] flex flex-col gap-3 xl:gap-4">
@@ -1094,7 +1131,7 @@ const Contact = () => {
             />
 
             <h3 className="font-sans font-light text-[6.93px] xl:text-xs text-white">
-              +91 9712345678
+              {number ? number : "+91 9712345678"}
             </h3>
           </div>
           <div className="flex gap-1 xl:gap-2 items-center ">
@@ -1105,7 +1142,7 @@ const Contact = () => {
             />
 
             <h3 className="font-sans font-light text-[6.93px] xl:text-xs text-white">
-              lauraanderson@gmail.com
+              {inputEmail ? inputEmail : "lauraanderson@gmail.com"}
             </h3>
           </div>
           <div className="flex gap-1 xl:gap-2 items-center">
@@ -1116,7 +1153,9 @@ const Contact = () => {
             />
 
             <h3 className="font-sans font-light text-[6.93px] xl:text-xs text-white">
-              Plot No. 7 1st Main Road Karnataka, Bangalore-56078
+              {address ? address : "Plot No. 7 1st Main Road"}{" "}
+              {state ? state : "Karnataka"}, {city ? city : "Bangalore"}-
+              {zipcode ? zipcode : "56078"},{country ? country : "India"}
             </h3>
           </div>
         </div>
@@ -1212,12 +1251,46 @@ const Skills = () => {
   );
 };
 
-const InfoSection = ({ isActiveComponent }) => {
+const InfoSection = ({ isActiveComponent, onSubmit }) => {
   const [onClickAddress, setOnClickAddress] = useState(2);
 
   const handleClick = useCallback((id) => {
     setOnClickAddress(id);
   }, []);
+
+  const [formData, setFormData] = useState({
+    fullname: "",
+    number: "",
+    email: "",
+    address: "",
+    zipcode: "",
+    country: "",
+    state: "",
+    city: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = () => {
+    onSubmit(formData);
+    // Clear input fields after submission
+    setFormData({
+      fullname: "",
+      number: "",
+      email: "",
+      address: "",
+      zipcode: "",
+      country: "",
+      state: "",
+      city: "",
+    });
+  };
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-between px-6 py-4 ">
@@ -1241,176 +1314,46 @@ const InfoSection = ({ isActiveComponent }) => {
                 <img src={upper_arrow} alt="" className="w-2 h-2" />
               </div>
               <div>
-                <TextField
-                  label="Address"
-                  variant="outlined"
-                  className="w-full h-14 "
-                  type="text"
-                  sx={{
-                    "& .MuiInputLabel-root": {
-                      color: "#B3B9C4",
-                      fontSize: "1rem",
-
-                      // Default label color
-                    },
-                    "& .MuiInputLabel-root.Mui-focused": {
-                      color: "#B3B9C4", // Label color when focused
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      fontSize: "1rem",
-                      fontWeight: 600,
-                      color: "#091E42",
-                      "& fieldset": {
-                        borderColor: "#B3B9C4",
-                        borderRadius: "0.5rem", // Default border color
-                      },
-                      "&:hover fieldset": {
-                        borderColor: "#B3B9C4", // Border color on hover
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "#B3B9C4", // Border color when focused
-                      },
-                    },
-                  }}
+                <CustomTextField
+                  label={"Address"}
+                  nameProp={"address"}
+                  value={formData.address}
+                  onChange={handleChange}
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <TextField
-                    label="Zip Code"
-                    variant="outlined"
-                    className="w-full h-14 "
-                    type="text"
-                    sx={{
-                      "& .MuiInputLabel-root": {
-                        color: "#B3B9C4",
-                        fontSize: "1rem",
-
-                        // Default label color
-                      },
-                      "& .MuiInputLabel-root.Mui-focused": {
-                        color: "#B3B9C4", // Label color when focused
-                      },
-                      "& .MuiOutlinedInput-root": {
-                        fontSize: "1rem",
-                        fontWeight: 600,
-                        color: "#091E42",
-                        "& fieldset": {
-                          borderColor: "#B3B9C4",
-                          borderRadius: "0.5rem", // Default border color
-                        },
-                        "&:hover fieldset": {
-                          borderColor: "#B3B9C4", // Border color on hover
-                        },
-                        "&.Mui-focused fieldset": {
-                          borderColor: "#B3B9C4", // Border color when focused
-                        },
-                      },
-                    }}
+                  <CustomTextField
+                    label={"Zip Code"}
+                    nameProp={"zipcode"}
+                    value={formData.zipcode}
+                    onChange={handleChange}
                   />
                 </div>
                 <div>
-                  <TextField
-                    label="Country"
-                    variant="outlined"
-                    className="w-full h-14 "
-                    type="text"
-                    sx={{
-                      "& .MuiInputLabel-root": {
-                        color: "#B3B9C4",
-                        fontSize: "1rem",
-
-                        // Default label color
-                      },
-                      "& .MuiInputLabel-root.Mui-focused": {
-                        color: "#B3B9C4", // Label color when focused
-                      },
-                      "& .MuiOutlinedInput-root": {
-                        fontSize: "1rem",
-                        fontWeight: 600,
-                        color: "#091E42",
-                        "& fieldset": {
-                          borderColor: "#B3B9C4",
-                          borderRadius: "0.5rem", // Default border color
-                        },
-                        "&:hover fieldset": {
-                          borderColor: "#B3B9C4", // Border color on hover
-                        },
-                        "&.Mui-focused fieldset": {
-                          borderColor: "#B3B9C4", // Border color when focused
-                        },
-                      },
-                    }}
+                  <CustomTextField
+                    label={"Country"}
+                    nameProp={"country"}
+                    value={formData.country}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <TextField
-                    label="State"
-                    variant="outlined"
-                    className="w-full h-14 "
-                    type="text"
-                    sx={{
-                      "& .MuiInputLabel-root": {
-                        color: "#B3B9C4",
-                        fontSize: "1rem",
-
-                        // Default label color
-                      },
-                      "& .MuiInputLabel-root.Mui-focused": {
-                        color: "#B3B9C4", // Label color when focused
-                      },
-                      "& .MuiOutlinedInput-root": {
-                        fontSize: "1rem",
-                        fontWeight: 600,
-                        color: "#091E42",
-                        "& fieldset": {
-                          borderColor: "#B3B9C4",
-                          borderRadius: "0.5rem", // Default border color
-                        },
-                        "&:hover fieldset": {
-                          borderColor: "#B3B9C4", // Border color on hover
-                        },
-                        "&.Mui-focused fieldset": {
-                          borderColor: "#B3B9C4", // Border color when focused
-                        },
-                      },
-                    }}
+                  <CustomTextField
+                    label={"State"}
+                    nameProp={"state"}
+                    value={formData.state}
+                    onChange={handleChange}
                   />
                 </div>
                 <div>
-                  <TextField
-                    label="City"
-                    variant="outlined"
-                    className="w-full h-14 "
-                    type="text"
-                    sx={{
-                      "& .MuiInputLabel-root": {
-                        color: "#B3B9C4",
-                        fontSize: "1rem",
-
-                        // Default label color
-                      },
-                      "& .MuiInputLabel-root.Mui-focused": {
-                        color: "#B3B9C4", // Label color when focused
-                      },
-                      "& .MuiOutlinedInput-root": {
-                        fontSize: "1rem",
-                        fontWeight: 600,
-                        color: "#091E42",
-                        "& fieldset": {
-                          borderColor: "#B3B9C4",
-                          borderRadius: "0.5rem", // Default border color
-                        },
-                        "&:hover fieldset": {
-                          borderColor: "#B3B9C4", // Border color on hover
-                        },
-                        "&.Mui-focused fieldset": {
-                          borderColor: "#B3B9C4", // Border color when focused
-                        },
-                      },
-                    }}
+                  <CustomTextField
+                    label={"City"}
+                    nameProp={"city"}
+                    value={formData.city}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -1441,37 +1384,11 @@ const InfoSection = ({ isActiveComponent }) => {
                 </div>
               </div>
               <div>
-                <TextField
-                  label="Full Name"
-                  variant="outlined"
-                  className="w-full h-14 "
-                  type="text"
-                  sx={{
-                    "& .MuiInputLabel-root": {
-                      color: "#B3B9C4",
-                      fontSize: "1rem",
-
-                      // Default label color
-                    },
-                    "& .MuiInputLabel-root.Mui-focused": {
-                      color: "#B3B9C4", // Label color when focused
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      fontSize: "1rem",
-                      fontWeight: 600,
-                      color: "#091E42",
-                      "& fieldset": {
-                        borderColor: "#B3B9C4",
-                        borderRadius: "0.5rem", // Default border color
-                      },
-                      "&:hover fieldset": {
-                        borderColor: "#B3B9C4", // Border color on hover
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "#B3B9C4", // Border color when focused
-                      },
-                    },
-                  }}
+                <CustomTextField
+                  label={"Full Name"}
+                  nameProp={"fullname"}
+                  value={formData.fullname}
+                  onChange={handleChange}
                 />
               </div>
               <div className="w-full gap-2 h-14 border-2 border-gray-300 rounded-lg px-4 text-gray-900   flex items-center ">
@@ -1479,43 +1396,19 @@ const InfoSection = ({ isActiveComponent }) => {
                 <img src={downImg} alt="" className=" w-6 h-6" />
 
                 <input
-                  type="tel"
+                  name="number"
+                  value={formData.number}
+                  onChange={handleChange}
                   placeholder="Phone Number"
                   className="w-full h-14 border-2 border-gray-300 focus:outline-none px-2 border-r-white font-sans font-semibold text-base text-[#091E42]"
                 />
               </div>
               <div>
-                <TextField
-                  label="Email"
-                  variant="outlined"
-                  className="w-full h-14 "
-                  type="email"
-                  sx={{
-                    "& .MuiInputLabel-root": {
-                      color: "#B3B9C4",
-                      fontSize: "1rem",
-
-                      // Default label color
-                    },
-                    "& .MuiInputLabel-root.Mui-focused": {
-                      color: "#B3B9C4", // Label color when focused
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      fontSize: "1rem",
-                      fontWeight: 600,
-                      color: "#091E42",
-                      "& fieldset": {
-                        borderColor: "#B3B9C4",
-                        borderRadius: "0.5rem", // Default border color
-                      },
-                      "&:hover fieldset": {
-                        borderColor: "#B3B9C4", // Border color on hover
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "#B3B9C4", // Border color when focused
-                      },
-                    },
-                  }}
+                <CustomTextField
+                  label={"Email"}
+                  nameProp={"email"}
+                  value={formData.email}
+                  onChange={handleChange}
                 />
               </div>
               <div className="py-8">
@@ -1546,7 +1439,10 @@ const InfoSection = ({ isActiveComponent }) => {
         {isActiveComponent === "Languages" && <DashboardLanguages />}
       </div>
 
-      <div className="w-full gap-4 flex items-center justify-center cursor-pointer">
+      <div
+        className="w-full gap-4 flex items-center justify-center cursor-pointer"
+        onClick={handleSubmit}
+      >
         <div className="w-14 h-11 rounded flex items-center justify-center bg-[#F1F2F4]">
           <img src={arrow_back} alt="" className="w-6 h-6 " />
         </div>

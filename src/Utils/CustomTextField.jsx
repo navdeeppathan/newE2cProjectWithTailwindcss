@@ -10,12 +10,14 @@ const CustomTextField = ({
   width,
   height,
   opacity,
+  nameProp,
 }) => {
   return (
     <div>
       <TextField
         label={label}
         value={value}
+        name={nameProp}
         onChange={onChange}
         variant="outlined"
         className={`w-full h-14 ${opacity} `}
